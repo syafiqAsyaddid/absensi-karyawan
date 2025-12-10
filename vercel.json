@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "public/index.php": { "runtime": "vercel-php@0.6.0" }
+  },
+  "routes": [
+    { "src": "/(uploads)/(.*)", "dest": "/public/$1/$2" },
+    { "src": "/(.*)", "dest": "/public/index.php" }
+  ],
+  "env": {
+    "BASEURL": "https://your-app-name.vercel.app/public",
+    "DB_HOST": "your-db-host",
+    "DB_USER": "your-db-user",
+    "DB_PASS": "your-db-pass",
+    "DB_NAME": "your-db-name"
+  }
+}
