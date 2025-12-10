@@ -20,12 +20,12 @@ class Database {
         ];
 
         try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
-        } catch (PDOException $e) {
-            // die($e->getMessage()); // Opsional: Hapus atau ganti die() agar aplikasi tidak crash total
-            die("Koneksi Database Gagal: " . $e->getMessage());
-        }
+    $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
+} catch (PDOException $e) {
+    die($e->getMessage()); // Jika koneksi gagal, pesan ini HARUS muncul di Log Railway
+}
     }
+    
     public function query($query) {
         $this->stmt = $this->dbh->prepare($query);
     }
