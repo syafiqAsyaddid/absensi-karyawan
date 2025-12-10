@@ -4,13 +4,15 @@ class Database {
     private $user = DB_USER;
     private $pass = DB_PASS;
     private $db_name = DB_NAME;
+    private $db_port = DB_PORT; // <-- TAMBAH BARIS INI
 
     private $dbh;
     private $stmt;
 
     public function __construct() {
-        // Data Source Name
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
+        // Data Source Name (dengan Port)
+        // DSN BARU: 'mysql:host=DB_HOST;port=DB_PORT;dbname=DB_NAME'
+        $dsn = 'mysql:host=' . $this->host . ';port=' . $this->db_port . ';dbname=' . $this->db_name; // <-- MODIFIKASI BARIS INI
 
         $option = [
             PDO::ATTR_PERSISTENT => true,
@@ -20,10 +22,10 @@ class Database {
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
         } catch (PDOException $e) {
-            die($e->getMessage());
+            // die($e->getMessage()); // Opsional: Hapus atau ganti die() agar aplikasi tidak crash total
+            die("Koneksi Database Gagal: " . $e->getMessage());
         }
     }
-
     public function query($query) {
         $this->stmt = $this->dbh->prepare($query);
     }
