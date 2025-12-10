@@ -24,6 +24,9 @@ git push -u origin main
 3. Pilih repository aplikasi absensi Anda.
 4. Klik **"Deploy Now"**.
 
+   > **INFO:** Railway akan otomatis mendeteksi file `Dockerfile` yang baru saja kita buat. Ini akan memastikan aplikasi berjalan dengan PHP 8.2 dan Apache yang sudah dikonfigurasi dengan benar.
+   > Jika deployment tidak berjalan otomatis setelah push, buka tab **Settings** -> **Build**, dan pastikan **Builder** mengarah ke **Dockerfile**.
+
 ## 3. Menambahkan Database MySQL
 
 1. Di dashboard project Railway Anda, klik tombol **"New"** (atau klik kanan di area kosong).
@@ -68,4 +71,4 @@ git push -u origin main
 ## Catatan Penting
 
 - **File Upload**: Sama seperti Vercel, Railway menggunakan sistem file ephemeral. File yang diupload ke folder `public/uploads` akan hilang setiap kali Anda redeploy. Disarankan menggunakan layanan storage eksternal (Cloudinary/S3) untuk produksi.
-- **Procfile**: Saya sudah menambahkan file `Procfile` dan `composer.json` agar Railway tahu cara menjalankan aplikasi ini menggunakan Apache, sehingga `.htaccess` akan berfungsi normal.
+- **Dockerfile**: Saya sudah menambahkan `Dockerfile` yang dikonfigurasi khusus untuk aplikasi ini (PHP 8.2 + Apache + mod_rewrite). Railway akan menggunakannya otomatis.
