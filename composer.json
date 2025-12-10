@@ -1,0 +1,7 @@
+{
+    "name": "aabw/absensi",
+    "description": "Aplikasi Absensi PHP Native",
+    "require": {
+        "php": "^7.4 || ^8.0"
+    }
+}
