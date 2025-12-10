@@ -10,20 +10,21 @@ class Database {
     private $stmt;
 
     public function __construct() {
-        // Data Source Name (dengan Port)
-        // DSN BARU: 'mysql:host=DB_HOST;port=DB_PORT;dbname=DB_NAME'
-        $dsn = 'mysql:host=' . $this->host . ';port=' . $this->db_port . ';dbname=' . $this->db_name; // <-- MODIFIKASI BARIS INI
+        // Data Source Name
+        $dsn = 'mysql:host=' . $this->host . ';port=' . $this->db_port . ';dbname=' . $this->db_name;
 
         $option = [
             PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_TIMEOUT => 5 // <-- TAMBAH TIMEOUT 5 DETIK
         ];
 
         try {
-    $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
-} catch (PDOException $e) {
-    die($e->getMessage()); // Jika koneksi gagal, pesan ini HARUS muncul di Log Railway
-}
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
+        } catch (PDOException $e) {
+            // Ini akan mencetak pesan error ke log
+            die("Koneksi Database Gagal: " . $e->getMessage()); 
+        }
     }
     
     public function query($query) {
